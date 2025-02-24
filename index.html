@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Online CV Generator</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav>
+            <a href="index.html" class="nav-title"
+                ><h1>Online CV Generator</h1></a
+            >
+            <ul>
+                <li><a href="#templates">Choose Template</a></li>
+                <li><a href="#cv-form">Input Data</a></li>
+                <li><a href="#preview">Preview</a></li>
+            </ul>
+        </nav>
+
+        <section id="templates">
+            <h2>Choose a Template</h2>
+            <div class="template-options">
+                <button class="template" onclick="selectTemplate('template1')">
+                    Template 1
+                </button>
+                <button class="template" onclick="selectTemplate('template2')">
+                    Template 2
+                </button>
+            </div>
+        </section>
+
+        <section id="cv-form">
+            <h2>Input Your Data</h2>
+            <form id="cvForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        oninput="updatePreview()"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        oninput="updatePreview()"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        oninput="updatePreview()"
+                        required
+                    />
+                </div>
+
+                <div class="inside-form">
+                    <p>Education</p>
+                    <ul>
+                        <li>
+                            <label for="clg-name">College:</label>
+                            <input
+                                id="clg-name"
+                                oninput="updatePreview()"
+                                required
+                            />
+                        </li>
+                        <li>
+                            <label for="passing">Passing Year:</label>
+                            <input
+                                id="passing"
+                                oninput="updatePreview()"
+                                required
+                            />
+                        </li>
+                        <li>
+                            <label for="stream">Stream:</label>
+                            <input
+                                id="stream"
+                                oninput="updatePreview()"
+                                required
+                            />
+                        </li>
+                        <li>
+                            <label for="cgpa">CGPA:</label>
+                            <input
+                                id="cgpa"
+                                oninput="updatePreview()"
+                                required
+                            />
+                        </li>
+                    </ul>
+                    <button type="button" onclick="addEducation()">
+                        Add New Education
+                    </button>
+                </div>
+
+                <button type="button" onclick="addExperience()">
+                    Add Experience
+                </button>
+
+                <div class="inside-form">
+                    <p>Projects</p>
+                    <ul>
+                        <li>
+                            <label for="project-name">Project Name:</label>
+                            <input
+                                id="project-name"
+                                oninput="updatePreview()"
+                                required
+                            />
+                        </li>
+                        <li>
+                            <label for="project-desc"
+                                >Project Description:</label
+                            >
+                            <input
+                                id="project-desc"
+                                oninput="updatePreview()"
+                                required
+                            />
+                        </li>
+                    </ul>
+                    <button type="button" onclick="addProject()">
+                        Add New Project
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills:</label>
+                    <input
+                        id="skills"
+                        placeholder="Mention your skills seperated by comma"
+                        oninput="updatePreview()"
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </section>
+
+        <section id="preview">
+            <h2>CV Preview</h2>
+            <!-- <div id="previewTemplate" class="preview-section"></div> -->
+            <div class="preview-buttons">
+                <button
+                    type="button"
+                    onclick="showCVPopup()"
+                    class="preview-btn"
+                >
+                    Preview CV
+                </button>
+                <button
+                    type="button"
+                    onclick="updatePreview(); generatePDF()"
+                    class="export-btn"
+                >
+                    Export as PDF
+                </button>
+            </div>
+            <div
+                id="cvPreview"
+                class="cv-preview-container"
+                style="display: none"
+            >
+                <div id="previewName"></div>
+                <div id="previewContact" class="preview-section"></div>
+                <div id="previewEducation" class="preview-section"></div>
+                <div id="previewExperience" class="preview-section"></div>
+                <div id="previewProjects" class="preview-section"></div>
+                <div id="previewSkills" class="preview-section"></div>
+            </div>
+        </section>
+
+        <!-- Modal/Popup for CV Preview -->
+        <div id="cvModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <h2>Your CV Preview</h2>
+                <div id="modalCvContent" class="modal-cv-content">
+                    <!-- CV content will be cloned here -->
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
